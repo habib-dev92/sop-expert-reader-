@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: sop-expert-ai
+    env: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: OPENAI_API_KEY
+        value: your-openrouter-key
+      - key: OPENAI_API_BASE
+        value: https://openrouter.ai/api/v1
+      - key: OPENAI_LLM_MODEL
+        value: gpt-4o-mini
+      - key: OPENAI_REFERER
+        value: https://sop-expert-ai.vercel.app
+      - key: OPENAI_APP_TITLE
+        value: SOP Expert AI
+      - key: CORS_ORIGINS
+        value: '["https://your-vercel-app.vercel.app"]'
+    healthCheckPath: /api/health

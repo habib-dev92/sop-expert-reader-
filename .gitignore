@@ -1,0 +1,63 @@
+# SOP Expert AI
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build
+.next/
+out/
+build/
+dist/
+
+# Environment
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+.eggs/
+*.egg
+
+# Uploads
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# ChromaDB
+backend/chroma_db/*
+!backend/chroma_db/.gitkeep
+
+# Logs
+backend/logs/*
+!backend/logs/.gitkeep
+
+# Database
+*.db
+*.sqlite
+
+# Next.js
+.next/
