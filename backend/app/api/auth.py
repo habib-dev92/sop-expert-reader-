@@ -76,12 +76,14 @@ def signup(data: UserCreate, db: Session = Depends(get_db)):
     if existing:
         raise HTTPException(status_code=400, detail="Email already registered")
 
-    user = User(
+     user = User(
         id=uuid.uuid4().hex,
         email=data.email,
         password_hash=hash_password(data.password),
         name=data.name or data.email.split("@")[0],
     )
+    if data.email == settings.ADMIN_EMAIL:
+        user.is_admin = 1
     db.add(user)
     db.commit()
     db.refresh(user)
