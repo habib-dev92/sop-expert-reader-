@@ -9,7 +9,7 @@ from app.api.admin import router as admin_router
 from app.utils.helpers import setup_logging
 
 logger = setup_logging()
-
+logger.info(f"CORS origins: {settings.CORS_ORIGINS}")
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -30,13 +30,15 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+logger.info(f"CORS origins: {settings.CORS_ORIGINS}")
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.CORS_ORIGINS,
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-)
 
 app.include_router(auth_router, prefix="/api")
 app.include_router(router, prefix="/api")
