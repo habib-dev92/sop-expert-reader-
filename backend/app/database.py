@@ -30,11 +30,11 @@ def run_migrations():
                 conn.execute(text("ALTER TABLE users ADD COLUMN reset_token_expires DATETIME"))
                 logger.info("Migration: added reset_token_expires column to users table")
             if "is_admin" not in columns:
-            conn.execute(text("ALTER TABLE users ADD COLUMN is_admin INTEGER DEFAULT 0"))
-            logger.info("Migration: added is_admin column to users table")
-        
-        conn.execute(text("UPDATE users SET is_admin = 1 WHERE email = :admin_email"), {"admin_email": settings.ADMIN_EMAIL})
-        logger.info(f"Set admin for {settings.ADMIN_EMAIL}")
+                conn.execute(text("ALTER TABLE users ADD COLUMN is_admin INTEGER DEFAULT 0"))
+                logger.info("Migration: added is_admin column to users table")
+
+            conn.execute(text("UPDATE users SET is_admin = 1 WHERE email = :admin_email"), {"admin_email": settings.ADMIN_EMAIL})
+            logger.info(f"Set admin for {settings.ADMIN_EMAIL}")
             conn.commit()
     except Exception as e:
         logger.warning(f"Migration check failed (non-critical): {e}")
